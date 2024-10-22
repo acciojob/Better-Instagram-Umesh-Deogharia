@@ -1,7 +1,6 @@
-//your code here
 let images = document.querySelectorAll('.image');
 let dragElem = null;
-
+// let bgstore = null;
 let image1 = document.querySelector('#drag1');
 let parent = document.querySelector('#parent');
 
@@ -19,19 +18,21 @@ parent.addEventListener("dragover", (e) => {
   console.log("dragover", e.target);
 });
 
-
-
  parent.addEventListener('drop',(e)=>{
     e.preventDefault();
 
-    // let dragTarget = e.target;
-    // let dragOver = dragElem;
+    let targetElem = e.target;
 
-    // console.log('DropElem',dragOver)
+    if (targetElem.className === 'image') {
+        let dragImage = dragElem.style.backgroundImage;
+        let targetBgImage = targetElem.style.backgroundImage;
 
-
-     if (dragElem) {
-        parent.appendChild(dragElem);
-        dragElem = null;
-     }
+        dragElem.style.backgroundImage = targetBgImage;
+        targetElem.style.backgroundImage = dragImage;
+    }
+    
+    dragElem = null;
+    //  if (dragElem) {
+    //     parent.appendChild(dragElem);
+    //  }
  })
